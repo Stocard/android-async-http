@@ -60,7 +60,8 @@ public class PersistentCookieStore implements CookieStore {
      */
     public PersistentCookieStore(Context context) {
         cookiePrefs = context.getSharedPreferences(COOKIE_PREFS, 0);
-        cookies = new ConcurrentHashMap<String, Cookie>();
+        cookies = new ConcurrentHashMap();
+
 
         // Load any previously stored cookies into the store
         String storedCookieNames = cookiePrefs.getString(COOKIE_NAME_STORE, null);
@@ -146,7 +147,7 @@ public class PersistentCookieStore implements CookieStore {
 
     @Override
     public List<Cookie> getCookies() {
-        return new ArrayList<Cookie>(cookies.values());
+        return new ArrayList(cookies.values());
     }
 
     /**
